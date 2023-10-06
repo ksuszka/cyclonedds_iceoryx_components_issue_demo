@@ -22,7 +22,7 @@ In the first terminal window start a docker container with the iox-roudi memory 
 docker run -it --shm-size 1GB --rm --name cyclone-component-test cyclone-component-test iox-roudi
 ```
 
-## Showing a correct behaviour with SHM disabled
+## Showing correct behavior with SHM disabled
 
 First, run an example without shared memory to see the correct result.
 
@@ -49,7 +49,7 @@ docker exec -it cyclone-component-test bash -c ". /ws/install/setup.bash && ros2
 You should get the number 181 = 1 launch file + 90 containers + 90 composable nodes.
 
 
-## Showing an incorrect behaviour with SHM enabled
+## Showing incorrect behavior with SHM enabled
 
 Now abort an execution in the second terminal by Ctrl+C and run the same command enabling shared memory support:
 
@@ -75,6 +75,6 @@ You will probably get a number lower than 181 - not all composable nodes were lo
 
 # Explanation
 
-The issue was observed in ROS system with a few dozens of nodes. Starting the system with SHM enabled casused random nodes to not being loaded.
+The issue was observed in ROS system with a few dozens of nodes. Starting the system with SHM enabled caused random nodes to not being loaded.
 
 This repository contains a minimal example which demonstrates the issue using the standard Iceoryx compilation. As far as I tested, the type of composable node loaded doesn't matter, however in this repository the composable node with the /parameter_events publisher disabled is used so a large number of nodes can be spawned without triggering the https://github.com/eclipse-cyclonedds/cyclonedds/issues/1326#issuecomment-1181699596 issue.
